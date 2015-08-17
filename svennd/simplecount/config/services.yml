@@ -1,0 +1,15 @@
+services:
+  svennd.simplecount.manager:
+    class: svennd\simplecount\core\simplecount_functions
+    arguments:
+      - @config
+      - @dbal.conn
+      - @template
+      - @user
+
+  svennd.simplecount.listener:
+    class: svennd\simplecount\event\listener
+    arguments:
+      - @svennd.simplecount.manager
+    tags:
+      - { name: event.listener }

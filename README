@@ -1,0 +1,48 @@
+Extension Name: SimpleCount
+Author: SvennD
+
+Extension Description: This replaces the default exact number of the forum with an approximate number; The idea is based on the counting system in Wolfram Alpha. The code was copy'd from TimeAgo ext by MuhClaren so any references are not coincident.
+
+Extension Version: 1.0.0
+
+Features:
+Fully customization in ACP
+Works on viewforum.php and index.php
+Works in all styles
+No JS
+
+Screenshots
+http://i.imageforge.us/970e1510d82351bccb0bcc7e8adf4a9f.png
+http://i.imageforge.us/6f6c2508f47c4712829fbb124fe2e948.png
+http://i.imageforge.us/f145d072b5141c8c6a89cda45cd1eee3.png
+
+
+HACK needed on index.php
+
+## FIND (line 164-168)
+// Assign index specific vars
+$template->assign_vars(array(
+	'TOTAL_POSTS'	=> $user->lang('TOTAL_POSTS_COUNT', (int) $config['num_posts']),
+	'TOTAL_TOPICS'	=> $user->lang('TOTAL_TOPICS', (int) $config['num_topics']),
+	'TOTAL_USERS'	=> $user->lang('TOTAL_USERS', (int) $config['num_users']),
+	
+## REPLACE WITH
+// Assign index specific vars
+$template->assign_vars(array(
+
+## FIND (line 197-198)
+$vars = array('page_title');
+extract($phpbb_dispatcher->trigger_event('core.index_modify_page_title', compact($vars)));
+
+## REPLACE WITH
+// simplecount modification
+$totals = array(
+				'TOTAL_POSTS' 	=> $user->lang('TOTAL_POSTS_COUNT', (int) $config['num_posts']),
+				'TOTAL_TOPICS' 	=> $user->lang('TOTAL_TOPICS', (int) $config['num_topics']),
+				'TOTAL_USERS' 	=> $user->lang('TOTAL_USERS', (int) $config['num_users'])
+				);
+$vars = array('page_title', 'totals');
+extract($phpbb_dispatcher->trigger_event('core.index_modify_page_title', compact($vars)));
+
+// simplecount modification
+$template->assign_vars($totals);

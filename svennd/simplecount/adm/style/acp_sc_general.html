@@ -1,0 +1,89 @@
+{% include 'overall_header.html' %}
+<h1>{L_ACP_SIMPLECOUNT_GENERAL_SETTINGS}</h1>
+<p>{L_ACP_SIMPLECOUNT_EXPLAIN}</p>
+
+{% if S_ERROR %}
+	<div class="errorbox">
+		<h3>{L_WARNING}</h3>
+		<p>{{ ERROR_MSG }}</p>
+	</div>
+{% endif %}
+<form id="acp_sc_general" method="post" action="{{ U_ACTION }}">
+	<fieldset>
+		<legend>{L_GENERAL_OPTIONS}</legend>
+		<dl>
+			<dt><label>{L_ACP_SIMPLECOUNT_ON_OFF}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="sc_active" value="1" {% if SC_ACTIVE == 1 %} checked="checked"{% endif %}/> {L_ON}</label>
+				<label><input type="radio" class="radio" name="sc_active" value="0" {% if SC_ACTIVE == 0 %} checked="checked"{% endif %}/> {L_OFF}</label>
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{L_ACP_SIMPLECOUNT_FORUM_ROW}</legend>
+		<dl>
+			<dt><label>{L_ACP_SIMPLECOUNT_POSTS}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="sc_posts" value="1" {% if SC_POSTS == 1 %} checked="checked"{% endif %}/> {L_ON}</label>
+				<label><input type="radio" class="radio" name="sc_posts" value="0" {% if SC_POSTS == 0 %} checked="checked"{% endif %}/> {L_OFF}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label>{L_ACP_SIMPLECOUNT_TOPICS}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="sc_topics" value="1" {% if SC_TOPICS == 1 %} checked="checked"{% endif %}/> {L_ON}</label>
+				<label><input type="radio" class="radio" name="sc_topics" value="0" {% if SC_TOPICS == 0 %} checked="checked"{% endif %}/> {L_OFF}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label>{L_ACP_SIMPLECOUNT_CLICKS}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="sc_clicks" value="1" {% if SC_CLICKS == 1 %} checked="checked"{% endif %}/> {L_ON}</label>
+				<label><input type="radio" class="radio" name="sc_clicks" value="0" {% if SC_CLICKS == 0 %} checked="checked"{% endif %}/> {L_OFF}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label>{L_ACP_SIMPLCOUNT_VIEWFORUM_VIEWS}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="sc_viewforum_views" value="1" {% if SC_VIEWFORUM_VIEWS == 1 %} checked="checked"{% endif %}/> {L_ON}</label>
+				<label><input type="radio" class="radio" name="sc_viewforum_views" value="0" {% if SC_VIEWFORUM_VIEWS == 0 %} checked="checked"{% endif %}/> {L_OFF}</label>
+			</dd>
+		</dl>
+	</fieldset>
+	<i>{L_ACP_SIMPLECOUNT_INDEX_WARNING}</i>
+	<fieldset>
+		<legend>{L_ACP_SIMPLECOUNT_INDEX_OPTION}</legend>
+		<dl>
+			<dt><label>{L_ACP_SIMPLECOUNT_INDEX_POSTS}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="sc_index_posts" value="1" {% if SC_INDEX_POSTS == 1 %} checked="checked"{% endif %}/> {L_ON}</label>
+				<label><input type="radio" class="radio" name="sc_index_posts" value="0" {% if SC_INDEX_POSTS == 0 %} checked="checked"{% endif %}/> {L_OFF}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label>{L_ACP_SIMPLECOUNT_INDEX_TOPICS}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="sc_index_topics" value="1" {% if SC_INDEX_TOPICS == 1 %} checked="checked"{% endif %}/> {L_ON}</label>
+				<label><input type="radio" class="radio" name="sc_index_topics" value="0" {% if SC_INDEX_TOPICS == 0 %} checked="checked"{% endif %}/> {L_OFF}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label>{L_ACP_SIMPLECOUNT_INDEX_USERS}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="sc_index_users" value="1" {% if SC_INDEX_USERS == 1 %} checked="checked"{% endif %}/> {L_ON}</label>
+				<label><input type="radio" class="radio" name="sc_index_users" value="0" {% if SC_INDEX_USERS == 0 %} checked="checked"{% endif %}/> {L_OFF}</label>
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{L_ACP_SUBMIT_CHANGES}</legend>
+		<p class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}"/>&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}"/>
+		</p>
+		{S_FORM_TOKEN}
+	</fieldset>
+
+</form>
+
+{% include 'overall_footer.html' %}

@@ -1,0 +1,27 @@
+{
+	"name": "svennd/simplecount",
+	"type": "phpbb-extension",
+	"description": "Simple count will transform the native phpBB exact counting to an approximate amount",
+	"homepage": "https://github.com/svennd/simplecount",
+	"version": "1.0.0",
+	"time": "2015-8-17",
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "SvennD",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3"
+	},
+	"require-dev": {
+		"phpbb/epv": "dev-master"
+	},
+	"extra": {
+		"display-name": "SimpleCount",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.5,<3.2.*@dev"
+		}
+	}
+}
