@@ -21,7 +21,13 @@ class listener implements EventSubscriberInterface
 
 	/** @var svennd\simplecount\core\simplecount_functions */
 	protected $simplecount_functions;
+	
+	/** @var **/
+	protected $template;
 
+	/** @var \phpbb\user */
+	protected $user;
+	
 	/**
 	 * Constructor
 	 *
@@ -29,9 +35,11 @@ class listener implements EventSubscriberInterface
 	 *
 	 * @access public
 	 */
-	public function __construct(\svennd\simplecount\core\simplecount_functions $simplecount_functions)
+	public function __construct(\svennd\simplecount\core\simplecount_functions $simplecount_functions, \phpbb\template\template $template, \phpbb\user $user)
 	{
 		$this->simplecount_functions = $simplecount_functions;
+		$this->template = $template;
+		$this->user = $user;
 	}
 
 	/**
@@ -47,6 +55,7 @@ class listener implements EventSubscriberInterface
 			'core.display_forums_modify_template_vars' 	=> 'modify_forum_row',
 			'core.index_modify_page_title' 				=> 'modify_forum_stats',
 			'core.viewforum_modify_topicrow' 			=> 'modify_viewforum_row',
+			'core.index_modify_page_title' 				=> 'modify_index_footer',
 		];
 	}
 
@@ -90,5 +99,26 @@ class listener implements EventSubscriberInterface
 	{
 		$block         = $event['topic_row'] ? 'topic_row' : 'tpl_ary';
 		$event[$block] = $this->simplecount_functions->set_simple_count_viewforum($event['topic_row'], $event[$block]);
+	}
+	
+	/**
+	 * Modify index footer
+	 *
+	 * @param object $event The event object
+	 *
+	 * @return void
+	 * @access public
+	 */
+	public function modify_index_footer($event)
+	{
+		// pull stats from config table
+		list($num_posts, $num_topics, $num_users) = $this->simplecount_functions->get_count_index_stats();
+		
+		// overwrite default variables
+		$this->template->assign_vars(array(
+		   'TOTAL_POSTS'	=> $this->user->lang('TOTAL_POSTS_COUNT', $this->simplecount_functions->make_simple((int) $num_posts)),
+		   'TOTAL_TOPICS'	=> $this->user->lang('TOTAL_TOPICS', $this->simplecount_functions->make_simple((int) $num_topics)),
+		   'TOTAL_USERS'	=> $this->user->lang('TOTAL_USERS', $this->simplecount_functions->make_simple((int) $num_users)),
+		   ));
 	}
 }

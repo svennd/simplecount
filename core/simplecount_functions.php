@@ -50,7 +50,7 @@ class simplecount_functions
 		$this->db       = $db;
 		$this->template = $template;
 		$this->user     = $user;
-    $this->user->add_lang_ext('svennd/simplecount', 'simplecount_var');
+		$this->user->add_lang_ext('svennd/simplecount', 'simplecount_var');
 	}
 
 	/**
@@ -177,9 +177,51 @@ class simplecount_functions
 			];
 		return $block;
 	}
+	
+	/**
+	 * pull board stats from config, and return in array
+	 *
+	 *
+	 * @return array ($num_posts, $num_topics, $num_users);
+	 * @access public
+	 */
+	public function get_count_index_stats()
+	{
+		// select the board stats from config table
+		$sql = 'SELECT config_name, config_value
+				FROM ' . CONFIG_TABLE . '
+				WHERE config_name = "num_posts" OR config_name = "num_topics" OR config_name = "num_users"
+				';
+		$result = $this->db->sql_query($sql);
+		
+		if ($row = $this->db->sql_fetchrow($result))
+		{
+			do
+			{
+				switch ($row['config_name'])
+				{
+					case "num_posts":
+						$num_posts = $row['config_value'];
+					break;
+					case "num_topics":
+						$num_topics = $row['num_topics'];
+					break;
+					case "num_users":
+						$num_users = $row['num_users'];
+					break;
+				}
+			}
+			while ($row = $this->db->sql_fetchrow($result));
+		}
+		else 
+		{
+			# should throw error, or try to calculate ourself
+			return array(0,0,0);
+		}
+		
+		# free result
+		$this->db->sql_freeresult($result);
+
+		return array($num_posts, $num_topics, $num_users);
+	}
 }
-
-
-
-
-

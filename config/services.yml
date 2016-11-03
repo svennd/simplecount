@@ -11,5 +11,7 @@ services:
     class: svennd\simplecount\event\listener
     arguments:
       - @svennd.simplecount.manager
+      - @template
+      - @user
     tags:
       - { name: event.listener }

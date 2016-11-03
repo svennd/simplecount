@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Simple count will transform the native phpBB exact counting to an approximate amount",
 	"homepage": "https://github.com/svennd/simplecount",
-	"version": "1.0.0",
-	"time": "2015-8-17",
+	"version": "0.0.2",
+	"time": "2016-11-03",
 	"license": "GPL-2.0",
 	"authors": [
 		{
