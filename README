@@ -1,7 +1,7 @@
 Extension Name: SimpleCount
 Author: SvennD
 
-Extension Description: This replaces the default exact number of the forum with an approximate number; The idea is based on the counting system in Wolfram Alpha. The code was copy'd from TimeAgo ext by MuhClaren so any references are not coincident.
+Extension Description: This replaces the default exact value of posts/users/topics of the forum with an easy referenced number (such as 4K instead of 4032); The idea is based on the counting system in Wolfram Alpha. I used the code from TimeAgo extension by MuhClaren to get this extension working, thanks MuhClaren!
 
 Extension Version: 0.0.2
 
