@@ -143,41 +143,7 @@ class simplecount_functions
 		);
 		return $block;
 	}
-	
-	/**
-	 * Assign Simplecount variables to the index
-	 *
-	 *
-	 * @param array $totals array with totals of users, posts and topics
-	 * @param array $block Template vars array
-	 *
-	 * @return array Template vars array
-	 * @access public
-	 */
-	public function set_simple_count_stats($totals, $block)
-	{
-		# if the extension is switched off
-		if ($this->config['sc_active'] == false) { return $block; }
-
-		# overwrite the original values
-		$block = 
-			[
-				'TOTAL_POSTS'	=> (($this->config['sc_index_posts']) ?
-										$this->user->lang('SIMPLECOUNT_TOTAL_POSTS_COUNT', $this->make_simple((int)$this->config['num_posts']))
-										:
-										$this->user->lang('TOTAL_POSTS_COUNT', (int) $this->config['num_posts'])),
-				'TOTAL_TOPICS'	=> (($this->config['sc_index_topics']) ?
-										$this->user->lang('SIMPLECOUNT_TOTAL_TOPICS', $this->make_simple((int)$this->config['num_topics']))
-										:
-										$this->user->lang('TOTAL_TOPICS', (int) $this->config['num_topics'])),
-				'TOTAL_USERS'	=> (($this->config['sc_index_users']) ? 
-										$this->user->lang('SIMPLECOUNT_TOTAL_USERS', $this->make_simple((int)$this->config['num_users']))
-										:
-										$this->user->lang('TOTAL_USERS', (int) $this->config['num_users']))
-			];
-		return $block;
-	}
-	
+		
 	/**
 	 * pull board stats from config, and return in array
 	 *
@@ -187,41 +153,12 @@ class simplecount_functions
 	 */
 	public function get_count_index_stats()
 	{
-		// select the board stats from config table
-		$sql = 'SELECT config_name, config_value
-				FROM ' . CONFIG_TABLE . '
-				WHERE config_name = "num_posts" OR config_name = "num_topics" OR config_name = "num_users"
-				';
-		$result = $this->db->sql_query($sql);
-		
-		if ($row = $this->db->sql_fetchrow($result))
-		{
-			do
-			{
-				switch ($row['config_name'])
-				{
-					case "num_posts":
-						$num_posts = $row['config_value'];
-					break;
-					case "num_topics":
-						$num_topics = $row['num_topics'];
-					break;
-					case "num_users":
-						$num_users = $row['num_users'];
-					break;
-				}
-			}
-			while ($row = $this->db->sql_fetchrow($result));
-		}
-		else 
-		{
-			# should throw error, or try to calculate ourself
-			return array(0,0,0);
-		}
-		
-		# free result
-		$this->db->sql_freeresult($result);
+		if ($this->config['sc_active'] == false) { return false; }
 
-		return array($num_posts, $num_topics, $num_users);
+		return array(
+						(($this->config['sc_index_posts']) ? $this->make_simple((int)$this->config['num_posts']) : (int)$this->config['num_posts']), 
+						(($this->config['sc_index_topics']) ? $this->make_simple((int)$this->config['num_topics']) : (int)$this->config['num_topics']), 
+						(($this->config['sc_index_users']) ? $this->make_simple((int)$this->config['num_users']) : (int)$this->config['num_users'])
+					);
 	}
 }
