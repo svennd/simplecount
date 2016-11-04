@@ -3,7 +3,7 @@ Author: SvennD
 
 Extension Description: This replaces the default exact value of posts/users/topics of the forum with an easy referenced number (such as 4K instead of 4032); The idea is based on the counting system in Wolfram Alpha. I used the code from TimeAgo extension by MuhClaren to get this extension working, thanks MuhClaren!
 
-Extension Version: 0.0.2
+Extension Version: 1.0.2
 
 Features:
 Fully customization in ACP
