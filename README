@@ -11,6 +11,6 @@ Works on viewforum.php and index.php
 Works in all styles
 No JS
 
-example :
-![Topics](https://raw.githubusercontent.com/svennd/simplecount/master/topic_messages.png)
-![Stats](https://raw.githubusercontent.com/svennd/simplecount/master/stats.png)
+Examples :
+[[https://raw.githubusercontent.com/svennd/simplecount/master/topic_messages.png|alt=topic_messages]]
+[[https://raw.githubusercontent.com/svennd/simplecount/master/stats.png|alt=stats]]
