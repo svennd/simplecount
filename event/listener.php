@@ -107,9 +107,9 @@ class listener implements EventSubscriberInterface
 		
 		// overwrite default variables
 		$this->template->assign_vars(array(
-		   'TOTAL_POSTS'	=> $this->user->lang('TOTAL_POSTS_COUNT', $num_posts),
-		   'TOTAL_TOPICS'	=> $this->user->lang('TOTAL_TOPICS', $num_topics),
-		   'TOTAL_USERS'	=> $this->user->lang('TOTAL_USERS', $num_users),
+		   'TOTAL_POSTS'	=> $this->user->lang('SIMPLECOUNT_TOTAL_POSTS_COUNT', $num_posts),
+		   'TOTAL_TOPICS'	=> $this->user->lang('SIMPLECOUNT_TOTAL_TOPICS', $num_topics),
+		   'TOTAL_USERS'	=> $this->user->lang('SIMPLECOUNT_TOTAL_USERS', $num_users),
 		   ));
 	}
 }
